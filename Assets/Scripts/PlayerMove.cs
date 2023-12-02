@@ -49,7 +49,6 @@ public class PlayerMove : MonoBehaviour
         {
             yVelocity = jumpPower;
             isJumping = true;
-            Debug.Log(yVelocity);
         }
 
         // 이동
@@ -61,6 +60,18 @@ public class PlayerMove : MonoBehaviour
 
         // 이동
         cc.Move(dir * moveSpeed * Time.deltaTime);
+
+        // Shift 버튼을 누른 상태에서 이동하면 달리기
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            moveSpeed = 15f;
+            jumpPower = 10f;
+        }
+        else
+        {
+            moveSpeed = 7f;
+            jumpPower = 7f;
+        }
         
 
     }
