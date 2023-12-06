@@ -16,6 +16,8 @@ public class PlayerMove : MonoBehaviour
     public float jumpPower = 7f;
     // 점프 파워 상태 변수
     public bool isJumping = false;
+    // 플레이어 체력 변수
+    public int hp = 100;
 
     // Start is called before the first frame update
     void Start()
@@ -43,14 +45,12 @@ public class PlayerMove : MonoBehaviour
             yVelocity = 0;
             
         }
-
         // 스페이스바 버튼을 누르면 점프
         if (Input.GetButtonDown("Jump") && !isJumping)
         {
             yVelocity = jumpPower;
             isJumping = true;
         }
-
         // 이동
         // transform.position += moveSpeed * dir * Time.deltaTime;
 
@@ -72,7 +72,17 @@ public class PlayerMove : MonoBehaviour
             moveSpeed = 7f;
             jumpPower = 7f;
         }
-        
-
+    }
+    // 플레이어 피격 함수
+    public void DamageAction(int damage)
+    {
+        // 적의 공격력만큼 플레이어 체력을 감소
+        hp -= damage;
+        // 체력이 음수일 때 0으로 초기화
+        if (hp < 0)
+        {
+            hp = 0;
+        }
+        Debug.Log($"플레이어 체력 : {hp}");
     }
 }
